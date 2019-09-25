@@ -1,0 +1,338 @@
+{
+    "id": "nl.bevlogenheid.evohome-gaastvoorzijde",
+    "name": {
+        "en": "Honeywell Evohome Gaast Voorzijde"
+    },
+    "version": "2.2.0",
+    "compatibility": ">=1.5.0",
+    "sdk": 2,
+    "description" : {
+	     "en" : "Control Honeywell Evohome thermostats",
+       "nl" : "Bedien je Honeywell Evohome verwarmingsinstallatie"
+    },
+    "author": {
+        "name": "Ralf van Dooren",
+        "email": "ralfvd@gmail.com"
+    },
+    "contributing": {
+        "donate": {
+            "paypal": {
+                "username": "ralfvd"
+            }
+        }
+    },
+    "homeyCommunityTopicId": 6887,
+    "images": {
+      "large": "./assets/images/large.png",
+      "small": "./assets/images/small.png"
+      },
+    "category": [ "climate" ],
+    "dependencies": { },
+    "drivers": [
+      {
+        "id": "thermostat",
+        "name": {
+          "en" : "Thermostat",
+          "nl" : "Thermostaat"
+        },
+        "class": "thermostat",
+        "capabilities": [ "target_temperature", "measure_temperature" ],
+        "images": {
+          "large": "drivers/thermostat/assets/images/large.jpg",
+          "small": "drivers/thermostat/assets/images/small.jpg"
+        },
+        "pair": [
+          {
+            "id": "start",
+            "template": "loading"
+          },
+          {
+            "id": "login",
+            "template": "login_credentials"
+          },
+          {
+            "id": "list_devices",
+            "template": "list_devices",
+            "navigation": {
+              "next": "add_devices"
+            }
+          },
+          {
+            "id": "add_devices",
+            "template": "add_devices"
+          }
+        ]
+      }
+    ],
+    "flow": {
+      "triggers": [
+        {
+          "id": "any_measure_temp_changed",
+          "title": {
+            "en": "Any changing temperature",
+            "nl": "Een temperatuur verandert"
+          },
+          "tokens": [
+            {
+              "name": "thermostat",
+              "title": {
+                "en": "device",
+                "nl": "thermostaat"
+              }
+            },
+            {
+              "name": "temperature",
+              "type": "number",
+              "title": {
+                "en": "temperature",
+                "nl": "temperatuur"
+              }
+            }
+          ]
+        },
+        {
+          "id": "quickaction_changed_externally",
+          "title": {
+            "en": "Mode changed not via Homey",
+            "nl": "Modus aangepast buiten Homey"
+          },
+          "tokens": [
+            {
+              "name": "qa_name",
+              "title": {
+                "en": "modus",
+                "nl": "mode"
+              }
+            }
+          ]
+        }
+        ],
+       "conditions": [
+       ],
+       "actions": [
+         {
+	        "id": "set_quickaction",
+	        "title": {
+	           "en": "Set QuickAction",
+             "nl": "Activeer SnelleActie"
+           },
+          "args":
+          [
+            {
+              "name": "qa",
+              "type": "dropdown",
+              "values": [
+                { "id": "Auto",
+                  "label": {
+                      "en": "Auto",
+                      "nl": "Automatisch"
+                    }
+                },
+                { "id": "HeatingOff",
+                  "label": {
+                      "en": "Heating off",
+                      "nl": "Verwarming uit"
+                    }
+                },
+                { "id": "AutoWithEco",
+                  "label": {
+                      "en": "Economy mode",
+                      "nl": "Zuinige modus"
+                    }
+                },
+                { "id": "Away",
+                  "label": {
+                      "en": "Away",
+                      "nl": "Afwezig"
+                    }
+                },
+                { "id": "Custom",
+                  "label": {
+                      "en": "Custom setting",
+                      "nl": "Aangepaste instelling"
+                    }
+                },
+                { "id": "DayOff",
+                  "label": {
+                      "en": "Day off",
+                      "nl": "Dag vrij"
+                    }
+                },
+                { "id": "AutoWithReset",
+                  "label": {
+                      "en": "Auto with reset",
+                      "nl": "Auto with reset"
+                    }
+                }
+                ]
+              }
+            ]
+         },
+         {
+         "id": "set_temporary_quickaction",
+         "title": {
+            "en": "Set Temporary QuickAction",
+             "nl": "Tijdelijke SnelleActie"
+           },
+          "args":
+          [
+            {
+              "name": "qa",
+              "title": {
+                "en": "Which QuickAction",
+                "nl": "Welke SnelleActie"
+              },
+              "type": "dropdown",
+              "values": [
+                { "id": "Auto",
+                  "label": {
+                      "en": "Auto",
+                      "nl": "Automatisch"
+                    }
+                },
+                { "id": "HeatingOff",
+                  "label": {
+                      "en": "Heating off",
+                      "nl": "Verwarming uit"
+                    }
+                },
+                { "id": "AutoWithEco",
+                  "label": {
+                      "en": "Economy mode",
+                      "nl": "Zuinige modus"
+                    }
+                },
+                { "id": "Away",
+                  "label": {
+                      "en": "Away",
+                      "nl": "Afwezig"
+                    }
+                },
+                { "id": "Custom",
+                  "label": {
+                      "en": "Custom setting",
+                      "nl": "Speciaal programma"
+                    }
+                },
+                { "id": "DayOff",
+                  "label": {
+                      "en": "Day off",
+                      "nl": "Dag vrij"
+                    }
+                }
+                ]
+              },
+              {
+                "name": "temp_hours",
+                "title": {
+                  "en": "For how many hours",
+                  "nl": "Voor dit aantal uren"
+                },
+                "type": "range",
+                "min": 0,
+                "max": 168,
+                "step": 1,
+                "label": " hours"
+              }
+            ]
+         },
+         {
+           "id": "set_quickaction_manual_entry",
+           "title": {
+             "en": "Set QuickAction manual entry",
+             "nl": "Activeer SnelleActie, handmatige invoer"
+           },
+           "args": [
+             {
+               "name": "qa",
+               "type": "text"
+             }
+           ]
+         },
+         {
+           "id": "set_temperature_manual",
+           "title": {
+             "en": "Set temperature by input",
+             "nl": "Stel temperatuur in"
+           },
+           "args": [
+             {
+               "name": "temp_manual",
+               "type": "text",
+               "attr": {
+                  "min": 0,
+                  "max": 30,
+                  "step": 0.5
+                }
+             },
+             {
+               "name": "device",
+               "type": "device",
+               "filter": "driver_id=thermostat"
+             }
+           ]
+         },
+         {
+           "id": "set_temperature_temporary",
+           "title": {
+             "en": "Set temporary temperature",
+             "nl": "Stel temperatuur tijdelijk in"
+           },
+           "args": [
+             {
+               "name": "temp_manual",
+               "title": {
+                 "en": "Set to this temperature",
+                 "nl": "Deze temperatuur"
+               },
+               "type": "range",
+               "min": 5,
+               "max": 30,
+               "step": 0.5,
+               "label": "°C",
+               "labelDecimals": 1
+             },
+             {
+               "name": "temp_hours",
+               "title": {
+                 "en": "For how many hours",
+                 "nl": "Voor dit aantal uren"
+               },
+               "type": "range",
+               "min": 0,
+               "max": 24,
+               "step": 1,
+               "label": " hours"
+             },
+             {
+               "name": "device",
+               "type": "device",
+               "filter": "driver_id=thermostat"
+             }
+           ]
+         },
+         {
+           "id": "reset_temperature",
+           "title": {
+             "en": "Cancel adjustment",
+             "nl": "Annuleer aanpassing"
+           },
+           "args": [
+             {
+             "name": "device",
+             "type": "device",
+             "filter": "driver_id=thermostat"
+             }
+         ]
+         },
+         {
+           "id": "reset_all_zones",
+           "title": {
+             "en": "Cancel adjustments in all zones",
+             "nl": "Annuleer aanpassing in alle zones"
+           }
+         }
+
+    ]
+  }
+}

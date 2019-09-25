@@ -1,0 +1,50 @@
+{	"settings": {
+    "OSMlanguage": "en",
+		"title": "Evohome settings",
+		"intro": "Before you can add your thermostats you need to enter your username and password for Evohome first. These settings are stored locally on your Homey.",
+		"account": {
+			"title": "Evohome account settings",
+			"fieldUsername": "Username (email)",
+			"fieldPassword": "Password",
+			"fieldDebug": "Enable debug logging",
+			"buttonSave": "Save",
+			"buttonClear": "Remove account settings",
+			"messages": {
+				"busyClearing": "Clearing account settings from Homey...",
+				"busySaving": "Account settings valid, saving to Homey...",
+				"busyValidation": "Validation account settings...",
+				"confirmClearAccount": "Are you sure you want to clear the account? Configured devices will stop working.",
+				"errorValidation": {
+          "1": "No username set",
+          "2": "No password set",
+          "11": "Incorrect settings",
+					"200": "Succesfully authenticated",
+          "401": "Incorrect settings",
+          "429": "Too many attempts, please wait some minutes before trying again"
+				},
+				"errorSaving": "Error saving account settings to Homey",
+				"successClearing": "Account settings cleared successfully",
+				"successSaving": "Account settings saved successfully"
+			}
+		},
+		"debug": {
+			"title": "Logging",
+			"thDateTime": "Date and time",
+			"thMessage": "Message",
+      "buttonClear": "Clear logging"
+		}
+	},
+	"pair": {
+		"start": {
+			"title": "Add Evohome thermostat device ",
+      "intro": "If a valid account is configured in the app settings sections of Homey, the Evohome thermostats will be listed.",
+			"buttonClose": "Close",
+			"messages": {
+				"busyValidation": "Validation account settings...",
+				"busyGetThermostats": "Get thermostats from Evohome...",
+				"errorNoSettings": "No account configured in the app settings section.",
+				"errorInvalidSettings": "Invalid account configured in the app settings sections."
+			}
+		}
+  }
+}

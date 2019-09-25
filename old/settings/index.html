@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="/manager/webserver/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="/manager/webserver/assets/js/jquery.ui.js"></script>
+    <script type="text/javascript" src="js/settings.js"></script>
+    <script type="text/javascript" src="js/settings-account.js"></script>
+    <script type="text/javascript" src="js/settings-log.js"></script>
+    <link rel="stylesheet" href="css/settings.css">
+   </style>
+  </head>
+  <body>
+    <h1 data-i18n="settings.title"></h1>
+    <div id="panel-buttons">
+      <button id="panel-button-1" class="button panel-button" onclick="showPanel(1)" data-i18n="settings.account.title">Account</button>&nbsp;
+      <button id="panel-button-3" class="button panel-button" onclick="showPanel(2)" data-i18n="settings.debug.title">Logging</button>&nbsp;
+    </div>
+    <!-- Account settings panel -->
+  	<div id="panel-1" class="panel">
+      <fieldset>
+        <p data-i18n="settings.intro"></p>
+        <div class="field row">
+          <label class="form_label" for="evohomeUsername" data-i18n="settings.account.fieldUsername"></label>
+          <input class="form_input" id="evohomeUsername" type="text" value="" />
+        </div>
+        <div class="field row">
+          <label class="form_label" for="evohomePassword" data-i18n="settings.account.fieldPassword"></label>
+          <input class="form_input" id="evohomePassword" type="password" />
+        </div>
+        <div>
+          <input id="evohomeDebug" type="checkbox" value="polling" />
+          <label for="evohomeDebug" data-i18n="settings.account.fieldDebug"></label>
+        </div>
+        <div id="busy" class="busy"><i class="fa fa-cog fa-spin fa-2x fa-fw"></i><span>..</span></div>
+        <div id="error" class="error"><i class="fa fa-times-circle fa-2x fa-fw"></i><span>..</span></div>
+        <div id="success" class="success"><i class="fa fa-check fa-2x fa-fw"></i><span>..</span></div>
+        <button id="savevohomeAccount" class="right" onclick="saveEvohomeAccount()"><i class="fa fa-save"></i> <span data-i18n="settings.account.buttonSave">Save</span></button>&nbsp;&nbsp;
+        <button id="clearevohomeAccount" class="right" onclick="clearEvohomeAccount()"><i class="fa fa-trash-o"></i> <span data-i18n="settings.account.buttonClear">Clear</span></button>
+      </fieldset>
+    </div>
+    <!-- Debug settings panel -->
+    <div id="panel-2" class="panel">
+      <fieldset>
+        <table id="logs" width=100%>
+          <tr>
+            <th class="datetime" data-i18n="settings.debug.thDateTime"></th>
+            <th class="entry" data-i18n="settings.debug.thMessage"></th>
+          </tr>
+        </table>
+        <button id="clearEvohomeLog" class="right" onclick="clearEvohomeLog()"><i class="fa fa-trash-o"></i> <span data-i18n="settings.debug.buttonClear">Clear</span></button>
+      </fieldset>
+    </div>
+  </body>
+</html>
